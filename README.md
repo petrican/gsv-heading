@@ -6,9 +6,17 @@ Returns the heading in json for a given Lat and Long as GET params
 Instalation
 -----------
 
-$npm install
+Clone the repository
+$ git clone https://github.com/petrican/gsv-heading
 
-$npm start
+Change dir to it
+$ cd gsv-heading/
+
+Install deps 
+$ npm install
+
+Run the serv
+$ npm start
 
 
 After this you can run queries in browser like 
