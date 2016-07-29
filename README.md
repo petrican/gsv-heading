@@ -1,2 +1,2 @@
 # gsv-heading
-Gets Google Heading from GSV images
+Gets Google Heading for GSV images
