@@ -8,6 +8,13 @@ Instalation
 
 $npm install
 
-$node app.js
+$npm start
+
+
+After this you can run queries in browser like 
+
+http://localhost:3000/?lat=41.4318382&lng=-81.3897891
+
+
 
 
