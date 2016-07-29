@@ -1,21 +1,60 @@
-var panorama = require('google-panorama-by-location')
- 
-// var location = [ 51.50700703827454, -0.12791916931155356 ]
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
- var location = [ 41.719540, -70.588950 ]
-panorama(location, function (err, result) {
-  if (err) throw err
-  
-  // Heading
-  console.log('Heading: ' + result.camera_rotation.heading); 
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
-  // pano ID 
-  // console.log(result.id)
- 
-  // actual latitude, longitude 
-  console.log(result.latitude)
-  console.log(result.longitude)
- 
-  // other details from Google API 
-  // console.log(result.copyright)
-})
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', routes);
+app.use('/users', users);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+
+module.exports = app;
